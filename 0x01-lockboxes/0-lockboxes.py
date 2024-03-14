@@ -25,7 +25,7 @@ def canUnlockAll(boxes):
                 stack.append(key)
 
     if not boxes:
-        return True
+        return False
 
     visited = set()
     stack = [0]
