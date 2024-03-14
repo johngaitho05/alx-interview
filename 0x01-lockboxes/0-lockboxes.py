@@ -16,22 +16,20 @@ Return True if all boxes can be opened, else return False
 
 
 def canUnlockAll(boxes):
-    """Checks if all boxes can be unlocked"""
-
-    def explore(box_index):
-        visited.add(box_index)
-        for key in boxes[box_index]:
-            if key not in visited and key < len(boxes):
-                stack.append(key)
-
     if not boxes or not boxes[0]:
         return False
 
-    visited = set()
-    stack = [0]
+    n1 = len(boxes)
+    visited = [False] * n1
+    visited[0] = True
+    queue = [0]
 
-    while stack:
-        current_box = stack.pop()
-        explore(current_box)
+    while queue:
+        current_box = queue.pop(0)
 
-    return len(visited) == len(boxes)
+        for key in boxes[current_box]:
+            if 0 <= key < n1 and not visited[key]:
+                visited[key] = True
+                queue.append(key)
+
+    return all(visited)
