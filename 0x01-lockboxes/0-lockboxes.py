@@ -19,8 +19,8 @@ def canUnlockAll(boxes):
     if not boxes or not boxes[0]:
         return False
 
-    n1 = len(boxes)
-    visited = [False] * n1
+    num_boxes = len(boxes)
+    visited = [False] * num_boxes
     visited[0] = True
     queue = [0]
 
@@ -28,7 +28,7 @@ def canUnlockAll(boxes):
         current_box = queue.pop(0)
 
         for key in boxes[current_box]:
-            if 0 <= key < n1 and not visited[key]:
+            if 0 <= key < num_boxes and not visited[key]:
                 visited[key] = True
                 queue.append(key)
 
