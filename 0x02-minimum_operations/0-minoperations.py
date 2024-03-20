@@ -35,7 +35,3 @@ def minOperations(n):
 
     return dp[n] if dp[n] != float('inf') else 0
 
-
-# Example usage:
-n = 9
-print(minOperations(n))  # Output: 6
