@@ -16,7 +16,8 @@ Number of operations: 6
 """
 
 
-def minOperations(n):
+def minOperations(n: int) -> int:
+    """Min operations"""
     if n == 1:
         return 0
 
