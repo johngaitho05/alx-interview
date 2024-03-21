@@ -20,25 +20,33 @@ Number of operations: 6
 """
 
 
-def minOperations(n: int) -> int:
-    """Min operations"""
-    if n == 1:
+def minOperations(n):
+    '''s calculates the least no. of calculations needed for it to
+    result to n H characters.
+    '''
+    if not isinstance(n, int):
         return 0
-
-    # Initialize an array to store the minimum number of operations for each
-    # position
-    dp: list = [0] * (n + 1)
-
-    for i in range(2, n + 1):
-        # Initialize the minimum number of operations for the current position
-        # as the maximum possible value
-        dp[i] = float('inf')
-
-        # Iterate through all factors of i to find the optimal solution
-        for j in range(1, i):
-            if i % j == 0:
-                # If j is a factor of i, it means we can copy and paste j times
-                # to reach i
-                dp[i] = min(dp[i], dp[j] + i // j)
-
-    return dp[n] if dp[n] != float('inf') else 0
+    ops_count = 0
+    clipboard = 0
+    done = 1
+    # print('H', end='')
+    while done < n:
+        if clipboard == 0:
+            # init (the first copy all and paste)
+            clipboard = done
+            done += clipboard
+            ops_count += 2
+            # print('-(11)->{}'.format('H' * done), end='')
+        elif n - done > 0 and (n - done) % done == 0:
+            # copy all and paste
+            clipboard = done
+            done += clipboard
+            ops_count += 2
+            # print('-(11)->{}'.format('H' * done), end='')
+        elif clipboard > 0:
+            # paste
+            done += clipboard
+            ops_count += 1
+            # print('-(01)->{}'.format('H' * done), end='')
+    # print('')
+    return ops_count
